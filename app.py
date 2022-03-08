@@ -14,6 +14,8 @@ from generate import generate
 from pathlib import Path
 from flask_script import Manager,Command
 
+from add_pic import addPic
+
 app = Flask(__name__)
 app.config['SECRET_KEY']='dongfangjiujian111'
 bootstrap=Bootstrap(app)
@@ -49,7 +51,11 @@ def index():
 		formData=request.form
 		fn=generate(**formData)
 		file=infoForm.photo.data
-		file.save('docs/'+fn+Path(file.filename).suffix)
+		pic_name=fn+Path(file.filename).suffix
+		doc_name=fn+".docx"
+		file.save('docs/'+pic_name)
+		
+		addPic(doc_name,pic_name)
 		
 		session['name']=infoForm.name.data
 		return redirect(url_for('success'))
