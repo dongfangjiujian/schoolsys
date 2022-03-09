@@ -3,8 +3,7 @@
 {% block head%}
 {% block scripts%}
 {{ super() }}
-{{ moment.include_moment() }}
-{{ moment.lang('zh-cn') }}
+
 {% endblock %}
 {{super()}}
 <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico')}}",type='image/x-icon'>

@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% block page_content%}
 <div class="page-header"><h1>hello {% if name%} {{ name}}{% else%}陌生人！{% endif%}</h1></div>
-<div>
-{{ moment(current_time).format('LLL') }}</div>
-<div>{{ moment(current_time).fromNow(refresh=True)}}</div>
+
 
 
 

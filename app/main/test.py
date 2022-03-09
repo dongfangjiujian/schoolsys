@@ -30,3 +30,7 @@ from datetime import datetime,date,time
 
 print(datetime.now())
 print(date.today())
+import os
+basedir=os.path.abspath(os.path.dirname(__file__))
+print(basedir)
+print(os.path.dirname(__file__))
