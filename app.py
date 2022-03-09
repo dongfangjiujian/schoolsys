@@ -62,7 +62,7 @@ def index():
 	return render_template('index.html',current_time=datetime.utcnow(),infoForm=infoForm,name=session.get('name'))
 @app.route('/success')
 def success():
-	return render_template('404.html',name=session.get('name'))
+	return render_template('success.html',name=session.get('name'))
 @app.route('/user/<name>')
 def user(name):
 	 

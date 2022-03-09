@@ -28,4 +28,5 @@ def addPic(doc_name,pic_name):
 	run=pic.paragraphs[0].add_run()
 	run.add_picture('docs/'+pic_name,width=Cm(2.5))
 	print('docs/'+pic_name+"   "+doc_name)
+
 	document.save(doc_name)
