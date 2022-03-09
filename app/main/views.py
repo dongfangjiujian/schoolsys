@@ -1,6 +1,6 @@
-from flask import redirect,render_template,url_for,session,request
+from flask import session,redirect,render_template,url_for,session,request
 from datetime import datetime
-# from .generate import generate
+from .generate import generate
 from . import main
 from .forms import Info
 
@@ -9,6 +9,16 @@ from .forms import Info
 def index():
 	infoForm=Info()
 	if infoForm.validate_on_submit():
+		
 		data=request.form
-		return redirect(url_for('.index'))
+		session['name']=infoForm.name.data
+
+		file=infoForm.photo
+		print(data)
+		print(type(data))
+		generate(data,file)
+		return redirect(url_for('.success'))
 	return render_template('index.html',infoForm=infoForm)
+@main.route('/success')
+def success():
+	return render_template('big_success.html',name=session.get('name'))

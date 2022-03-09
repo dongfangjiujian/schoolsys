@@ -1,29 +1,33 @@
 from mailmerge import MailMerge
 from datetime import time,datetime
+from docxtpl import DocxTemplate,InlineImage
+from docx import Document
+from docx.shared import Cm
 
-template='static/template.docx'
+template='app/static/template_jinja.docx'
 
-document=MailMerge(template)
+
 	
-def generate(**dict):
+def generate(dict,file):
 
-	# for field in document.get_merge_fields() :
-		
-	# 	for k,v in dict.items():
-	# 		if k in field :
+	document=DocxTemplate(template)
 
-
-
-	# 			new_dict[k]=v
-	# 			print(new_dict)
-				
-	# document.merge(new_dict)
-	# document.write('zuoxu.docx') 
 
 	timestamp=datetime.now().strftime(r"%H%M%S")
 	filename=dict['name']+timestamp
 	finalname="docs/"+filename+'.docx'
-	document.merge(**dict)
 
-	document.write(finalname) 
+	img=InlineImage(document,file.data,width=Cm(2.5),height=Cm(3.5))
+	# dict={
+	# 'name':'zuoxu',
+	# 'xueji':'sdf'
+	# }
+	context=dict.copy()
+	context['img']=img
+
+	
+	# document.render({'img':img})
+	document.render(context)
+
+	document.save(finalname) 
 	return filename
